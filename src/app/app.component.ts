@@ -8,9 +8,14 @@ import { WeatherService } from './services/weather.service';
   <div>
     <div class="nav">Current Weather for {{city}} </div>
     <weather-box
-      (exportWeather)="updateWeather($event)"    
+      (exportWeather)="updateWeather($event)"
+      (updateSearchText)="getSearchText($event)" 
+      [search]="search"
+         
     ></weather-box>
-    <app-footer></app-footer>
+    <app-footer [search]="search">
+      <h2>{{city}} {{search}}</h2>
+    </app-footer>
   </div>
   `,
   styles:[`
@@ -27,7 +32,15 @@ import { WeatherService } from './services/weather.service';
 })
 export class AppComponent {
   city: string = 'null';
+  wowzer = "wozer";
+  search = '...';
+  apples = '2';
   updateWeather(event) {
       this.city = event;
+  }
+  getSearchText(event) {
+    console.log('event triggered')
+    this.search = event;
+    console.log('event! ', event)
   }
 }
